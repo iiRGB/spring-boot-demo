@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: Tools
+  profiles:
+    active: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+
+abf:
+  shiro:
+    enabled: true
+    anons:
+    permission:
+      enable: true
+    dubbo:
+      application:
+        name: tools-web-shiro
+        owner: zhaoch
+        organization: org.tis
+        logger: slf4j
+      registry:
+        address: zookeeper://139.196.145.67:2181
+        timeout: 50000
+      log4j:
+        file: logs/tools-web-shiro.log
+
+
+druid:
+  pool:
+    initialSize: 10
+    maxActive: 100
+    minIdle: 10
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:com/rgb/tools/dao/mapper/*Mapper.xml
+  typeAliasesPackage: com.rgb.tools.dao.model #实体扫描，多个package用逗号或者分号分隔
+  global-config:
+    id-type: 2  #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    field-strategy: 2 #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    db-column-underline: true #表名和字段名是否使用下划线命名，用于转换
+    refresh-mapper: true #刷新mapper 调试神器
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
